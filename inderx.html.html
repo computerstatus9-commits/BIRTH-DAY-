@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 25.8.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Happy Birthday Sanju!&lt;/title&gt;
+    
+    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Satoshi:wght@400;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+    
+    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;style&gt;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #ff4d94 0%, #ff0055 100%);
+            --glass-bg: rgba(12, 10, 9, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0c0a09;
+            color: #f5f5f5;
+            font-family: 'Satoshi', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Aurora Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, hsla(333,70%,55%,.4) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, hsla(282, 82%, 54%, .3) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, hsla(210, 89%, 60%, .3) 0%, transparent 50%),
+                        radial-gradient(circle at 10% 80%, hsla(35, 90%, 60%, .3) 0%, transparent 50%);
+            filter: blur(80px);
+            animation: aurora-flow 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes aurora-flow {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(5%, 5%); }
+        }
+
+        /* Typography */
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to right, #ff99cc, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* UI Elements */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            display: none; /* Controlled by GSAP */
+        }
+
+        .step-active {
+            display: block;
+        }
+
+        .pill-button {
+            background: var(--primary-gradient);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px -5px rgba(255, 0, 85, 0.4);
+        }
+
+        .pill-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 30px -5px rgba(255, 0, 85, 0.6);
+        }
+
+        .pill-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            width: 20%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: width 0.6s ease;
+        }
+
+        /* Polaroid Effect */
+        .polaroid {
+            background: white;
+            padding: 12px 12px 40px 12px;
+            transform: rotate(-3deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.1s ease-out;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .polaroid-caption {
+            color: #333;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class=&quot;aurora&quot;&gt;&lt;/div&gt;
+    &lt;canvas id=&quot;bg-canvas&quot;&gt;&lt;/canvas&gt;
+
+    &lt;div class=&quot;fixed top-8 left-0 w-full flex justify-center z-50&quot;&gt;
+        &lt;div class=&quot;progress-container&quot;&gt;
+            &lt;div id=&quot;progress-bar&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;main class=&quot;relative h-screen w-full flex items-center justify-center p-6&quot;&gt;
+        
+        &lt;div id=&quot;step1&quot; class=&quot;glass-card step-active max-w-md w-full p-10 text-center&quot;&gt;
+            &lt;div class=&quot;text-6xl mb-6 animate-pulse&quot;&gt;❤️&lt;/div&gt;
+            &lt;h1 class=&quot;heading-serif text-4xl mb-4&quot;&gt;Hey Beautiful,&lt;/h1&gt;
+            &lt;p class=&quot;text-gray-300 mb-8 leading-relaxed&quot;&gt;I built a little world for you, just to bring a smile to your face on your special day.&lt;/p&gt;
+            &lt;button onclick=&quot;nextStep(2)&quot; class=&quot;pill-button px-8 py-3 rounded-full font-bold text-white uppercase tracking-wider&quot;&gt;Let's Begin&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;step2&quot; class=&quot;glass-card max-w-md w-full p-10 text-center&quot;&gt;
+            &lt;div class=&quot;text-6xl mb-6&quot;&gt;🎉&lt;/div&gt;
+            &lt;h1 class=&quot;heading-serif text-4xl mb-4&quot;&gt;Happy Birthday Dear SANJU!&lt;/h1&gt;
+            &lt;p class=&quot;text-gray-300 mb-8 leading-relaxed&quot;&gt;Another year of you making the world brighter. Your existence is a gift, and I'm so lucky to witness it.&lt;/p&gt;
+            &lt;button onclick=&quot;nextStep(3)&quot; class=&quot;pill-button px-8 py-3 rounded-full font-bold text-white uppercase tracking-wider&quot;&gt;There's more...&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;step3&quot; class=&quot;glass-card max-w-2xl w-full p-8 text-center&quot;&gt;
+            &lt;h1 class=&quot;heading-serif text-3xl mb-8&quot;&gt;A Few Things I Adore About You&lt;/h1&gt;
+            &lt;div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4 mb-8&quot;&gt;
+                &lt;div class=&quot;bg-white/5 p-6 rounded-2xl text-left border border-white/10 col-span-1 md:col-span-2&quot;&gt;
+                    &lt;h3 class=&quot;text-pink-400 font-bold mb-2&quot;&gt;✨ Your Unmatched Kindness&lt;/h3&gt;
+                    &lt;p class=&quot;text-sm text-gray-300&quot;&gt;The genuine warmth you show to everyone is something truly rare and beautiful.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-white/5 p-6 rounded-2xl text-left border border-white/10&quot;&gt;
+                    &lt;h3 class=&quot;text-pink-400 font-bold mb-2&quot;&gt;😊 That Smile&lt;/h3&gt;
+                    &lt;p class=&quot;text-sm text-gray-300&quot;&gt;It's a work of art.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bg-white/5 p-6 rounded-2xl text-left border border-white/10 col-span-1&quot;&gt;
+                    &lt;h3 class=&quot;text-pink-400 font-bold mb-2&quot;&gt;🌟 Radiant Spirit&lt;/h3&gt;
+                    &lt;p class=&quot;text-sm text-gray-300&quot;&gt;Your passion makes everything feel possible.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button onclick=&quot;nextStep(4)&quot; class=&quot;pill-button px-8 py-3 rounded-full font-bold text-white uppercase tracking-wider&quot;&gt;Remember this?&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;step4&quot; class=&quot;glass-card max-w-md w-full p-10 text-center&quot;&gt;
+            &lt;h1 class=&quot;heading-serif text-3xl mb-8&quot;&gt;That One Time...&lt;/h1&gt;
+            &lt;div class=&quot;flex justify-center mb-8&quot;&gt;
+                &lt;div class=&quot;polaroid&quot; id=&quot;polaroid&quot;&gt;
+                    &lt;img src=&quot;https://i.ibb.co/6Z6XgCg/crush.webp&quot; alt=&quot;Memory&quot;&gt;
+                    &lt;div class=&quot;polaroid-caption&quot;&gt;Our favorite memory.&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;text-gray-300 mb-8 leading-relaxed italic&quot;&gt;&quot;Every moment with you feels like a scene from a movie I'd watch on repeat.&quot;&lt;/p&gt;
+            &lt;button onclick=&quot;nextStep(5)&quot; class=&quot;pill-button px-8 py-3 rounded-full font-bold text-white uppercase tracking-wider&quot;&gt;One last thing...&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;step5&quot; class=&quot;glass-card max-w-md w-full p-10 text-center&quot;&gt;
+            &lt;div class=&quot;text-6xl mb-6&quot;&gt;🎂&lt;/div&gt;
+            &lt;h1 class=&quot;heading-serif text-3xl mb-4 uppercase&quot;&gt;Lucky Gift for Sanju Dear ❤️&lt;/h1&gt;
+            &lt;p class=&quot;text-gray-300 mb-8 leading-relaxed&quot;&gt;May the next year bring you all the love, success, and pure happiness you so rightfully deserve. May your dreams soar higher than ever.&lt;/p&gt;
+            
+            &lt;div id=&quot;final-message&quot; class=&quot;hidden mb-8 text-2xl font-bold text-pink-400&quot;&gt;
+                Happy Birthday, my crush! ❤️
+            &lt;/div&gt;
+
+            &lt;button id=&quot;celebrate-btn&quot; onclick=&quot;startFinale()&quot; class=&quot;pill-button px-10 py-4 rounded-full font-bold text-white uppercase tracking-widest text-lg&quot;&gt;Celebrate!&lt;/button&gt;
+        &lt;/div&gt;
+
+    &lt;/main&gt;
+
+    &lt;script&gt;
+        // --- THREE.JS BACKGROUND ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });</pre>
+</body>
+</html>
